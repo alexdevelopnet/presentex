@@ -1,0 +1,12 @@
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\net5.0\Domain.deps.json
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\net5.0\Domain.dll
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\net5.0\Domain.pdb
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.dll
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\refint\Domain.dll
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\Domain.pdb
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\net5.0\ref\Domain.dll
