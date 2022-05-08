@@ -1,0 +1,10 @@
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\netcoreapp3.1\Domain.dll
+D:\Projetos\presentex\ANF.Presentex\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.AssemblyReference.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.dll
+D:\Projetos\presentex\ANF.Presentex\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
