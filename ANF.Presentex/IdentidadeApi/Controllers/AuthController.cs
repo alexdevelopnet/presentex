@@ -62,7 +62,6 @@ namespace IdentidadeApi.Controllers
             }
             return BadRequest();
         }
-
         private async Task<UsuarioRespostaLogin> GerarJwt(string email)
         {
             var user = await userManager_.FindByEmailAsync(email);
