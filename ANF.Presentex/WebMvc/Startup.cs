@@ -24,6 +24,7 @@ namespace WebMvc
         {
             services.AddIdentityConfiguration();
             services.AddMvcConfiguration(Configuration);
+            services.RegisterServices();    
         }
          
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
