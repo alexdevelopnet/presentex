@@ -8,8 +8,4 @@
     <ProjectReference Include="..\IdentidadeApi\IdentidadeApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Identidade\" />
-  </ItemGroup>
-
 </Project>

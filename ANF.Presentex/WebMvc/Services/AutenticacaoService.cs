@@ -1,10 +1,8 @@
 ﻿using IdentidadeApi.Models;
-using System;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace WebMvc.Services
 {
@@ -22,7 +20,9 @@ namespace WebMvc.Services
             var loginContent = new StringContent(
                 content: JsonSerializer.Serialize(usuarioLogin),
                 Encoding.UTF8, mediaType: "application/Json");
-            var response = await httpClient_.PostAsync(requestUri: "https://https://localhost:44344/api/identidade/autenticar/", loginContent);
+            var response = await httpClient_.PostAsync(requestUri: "https://localhost:44344/api/identidade/autenticar/", loginContent);
+
+            var teste = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
         }
@@ -33,6 +33,8 @@ namespace WebMvc.Services
                 content: JsonSerializer.Serialize(usuarioRegistro),
                 Encoding.UTF8, mediaType: "application/Json");
             var response = await httpClient_.PostAsync(requestUri: "https://localhost:44344/api/identidade/nova-conta/", registroContent);
+
+            var teste = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
         }

@@ -96,3 +96,5 @@ D:\Projetos\presentex\ANF.Presentex\WebMvc\bin\Debug\netcoreapp3.1\IdentidadeApi
 D:\Projetos\presentex\ANF.Presentex\WebMvc\bin\Debug\netcoreapp3.1\IdentidadeApi.pdb
 D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\staticwebassets\WebMvc.StaticWebAssets.xml
 D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\Razor\Views\Identidade\Login.cshtml.g.cs
+D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\Razor\Views\Identidade\Registro.cshtml.g.cs

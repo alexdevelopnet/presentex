@@ -51,6 +51,7 @@ namespace WebMvc.Controllers
             var resposta = _autenticacaoService.Login(usuarioLogin);
             if (false) return View(usuarioLogin);
 
+            
             return RedirectToAction("Index", controllerName: "Home");
         }
 
