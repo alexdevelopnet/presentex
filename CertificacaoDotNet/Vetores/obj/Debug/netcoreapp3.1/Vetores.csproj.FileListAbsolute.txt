@@ -1,0 +1,14 @@
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.exe
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.deps.json
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.runtimeconfig.json
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.runtimeconfig.dev.json
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.dll
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\bin\Debug\netcoreapp3.1\Vetores.pdb
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.csproj.AssemblyReference.cache
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.AssemblyInfoInputs.cache
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.AssemblyInfo.cs
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.csproj.CoreCompileInputs.cache
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.dll
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.pdb
+D:\Projetos\presentex\CertificacaoDotNet\Vetores\obj\Debug\netcoreapp3.1\Vetores.genruntimeconfig.cache
