@@ -74,6 +74,7 @@ namespace WebMvc.Controllers
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", controllerName: "Home");
         }
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)

@@ -11,13 +11,6 @@ namespace WebMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -28,10 +21,43 @@ namespace WebMvc.Controllers
             return View();
         }
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Erro(int id)
+        {
+            var modelErro = new ErrorViewModel();
+            if (id==500)
+            {
+                modelErro.Mensagem = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte.";
+                modelErro.Titulo = "Ocorreu um erro!";
+                modelErro.ErroCode = id;
+            }
+            else if (id == 404)
+            {
+                modelErro.Mensagem= "A página que está procurando não existe! <br/> Em caso de duvida entre em contato com nosso suporte" ;
+
+            }
+            else if (id==403)
+            {
+
+            }
+            else
+            {
+                return StatusCode(404);
+            }
+            return View(modelErro);
+        }
+
+
+        public class ResponseResult
+        {
+            public string Title { get; set; }
+            public int Status { get; set; }
+            public ResponseErrorMessages Errors { get; set; }
+        }
+
+        public class ResponseErrorMessages
+        {
+            public List<string> Mensagens { get; set; }
+        }
     }
 }
