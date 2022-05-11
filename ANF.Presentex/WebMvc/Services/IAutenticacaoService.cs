@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using static IdentidadeApi.Models.UserViewModels;
+using WebMvc.Models;
 
 namespace WebMvc.Services
 {

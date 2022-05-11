@@ -16,24 +16,26 @@ namespace IdentidadeApi.Controllers
 {
     [ApiController]
     [Route("api/identidade")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
-        private readonly SignInManager<IdentityUser> signInManager_;
-        private readonly UserManager<IdentityUser> userManager_;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
 
 
-        public AuthController(SignInManager<IdentityUser> signInManager_, 
-            UserManager<IdentityUser> userManager_,IOptions<AppSettings> appSettings)
+        public AuthController(SignInManager<IdentityUser> signInManager_,
+                                UserManager<IdentityUser> userManager_, 
+                                IOptions<AppSettings> appSettings)
         {
-            this.signInManager_ = signInManager_;
-            this.userManager_ = userManager_;
+            this._signInManager = signInManager_;
+            this._userManager = userManager_;
             this._appSettings = appSettings.Value;
         }
+
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(UsuarioRegistro usuarioRegistro)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var user = new IdentityUser
             {
@@ -41,40 +43,59 @@ namespace IdentidadeApi.Controllers
                 Email = usuarioRegistro.Email,
                 EmailConfirmed = true
             };
-            var result = await userManager_.CreateAsync(user, usuarioRegistro.Senha);
+
+            var result = await _userManager.CreateAsync(user, usuarioRegistro.Senha);
+
             if (result.Succeeded)
             {
-                await signInManager_.SignInAsync(user, isPersistent: false);
-                return Ok(await GerarJwt(usuarioRegistro.Email));
+                return CustomResponse(await GerarJwt(usuarioRegistro.Email));
             }
-            return BadRequest();
+
+            foreach (var error in result.Errors)
+            {
+                AdicionarErroProcessamento(error.Description);
+            }
+
+            return CustomResponse();
         }
 
-     [HttpPost("autenticar")]
+        [HttpPost("autenticar")]
         public async Task<ActionResult> Login(UsuarioLogin usuarioLogin)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            var result = await signInManager_.PasswordSignInAsync(userName: usuarioLogin.Email, password: usuarioLogin.Senha
-                , isPersistent: false, lockoutOnFailure: true);
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            var result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha,
+                false, true);
+
             if (result.Succeeded)
             {
-                return Ok(await GerarJwt(usuarioLogin.Email));
+                return CustomResponse(await GerarJwt(usuarioLogin.Email));
             }
-            return BadRequest();
+
+            if (result.IsLockedOut)
+            {
+                AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas");
+                return CustomResponse();
+            }
+
+            AdicionarErroProcessamento("Usuário ou Senha incorretos");
+            return CustomResponse();
         }
+
         private async Task<UsuarioRespostaLogin> GerarJwt(string email)
         {
-            var user = await userManager_.FindByEmailAsync(email);
-            var claims = await userManager_.GetClaimsAsync(user);
+            var user = await _userManager.FindByEmailAsync(email);
+            var claims = await _userManager.GetClaimsAsync(user);
 
             var identityClaims = await ObterClaimsUsuario(claims, user);
             var encodedToken = CodificarToken(identityClaims);
 
             return ObterRespostaToken(encodedToken, user, claims);
         }
+
         private async Task<ClaimsIdentity> ObterClaimsUsuario(ICollection<Claim> claims, IdentityUser user)
         {
-            var userRoles = await userManager_.GetRolesAsync(user);
+            var userRoles = await _userManager.GetRolesAsync(user);
 
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));

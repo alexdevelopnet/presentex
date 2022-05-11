@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebMvc.Models;
 using WebMvc.Services;
-using static IdentidadeApi.Models.UserViewModels;
+ 
 
 namespace WebMvc.Controllers
 {
-    public class IdentidadeController : Controller
+    public class IdentidadeController : MainController
     {
         private readonly IAutenticacaoService _autenticacaoService;
 
@@ -32,17 +33,14 @@ namespace WebMvc.Controllers
         public async Task<IActionResult> Registro(UsuarioRegistro usuarioRegistro)
         {
             if (!ModelState.IsValid) return View(usuarioRegistro);
-
-            //API  - Registro
+          
             var resposta = await _autenticacaoService.Registro(usuarioRegistro);
 
-            //Realizar registro na Aoo
-
-            //if (false) return View(usuarioRegistro);
+            if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioRegistro);
 
             await RealizarLogin(resposta);
 
-            return RedirectToAction("Index", controllerName: "Home");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -55,19 +53,21 @@ namespace WebMvc.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
+        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin, string returnUrl = null)
         {
-
+            ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(usuarioLogin);
 
             //API - Login
             var resposta = await _autenticacaoService.Login(usuarioLogin);
 
-            //if (false) return View(usuarioLogin);
-            //Relaizar login a App
+            if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioLogin);
+
             await RealizarLogin(resposta);
 
-            return RedirectToAction("Index", controllerName: "Home");
+            if (string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Home");
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet]

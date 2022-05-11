@@ -3,43 +3,72 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static IdentidadeApi.Models.UserViewModels;
+using WebMvc.Models;
 
 namespace WebMvc.Services
 {
-    public class AutenticacaoService : IAutenticacaoService
+    public class AutenticacaoService : Service, IAutenticacaoService
     {
-        private readonly HttpClient httpClient_;
+        private readonly HttpClient _httpClient;
 
         public AutenticacaoService(HttpClient httpClient)
         {
-            this.httpClient_ = httpClient;
+            this._httpClient = httpClient;
         }
 
-        public async Task<UsuarioRespostaLogin> Login(UserViewModels.UsuarioLogin usuarioLogin)
+        public async Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin)
         {
-            var loginContent = new StringContent(
-                content: JsonSerializer.Serialize(usuarioLogin),
+            var loginContent = ObterConteudo(usuarioLogin);
+
+            var response = await _httpClient.PostAsync("https://localhost:44344/api/identidade/autenticar", loginContent);
+
+            var teste = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            if (!TratarErrosResponse(response))
+            {
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult =
+                    JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+            }
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+
+            //if (!TratarErrosResponse(response))
+            //{
+            //    return new UsuarioRespostaLogin
+            //    {
+            //        ResponseResult = await DeserializarObjetoResponse<ResponseResult>(response)
+            //    };
+            //}
+            //return await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
+        }
+
+        public async Task<UsuarioRespostaLogin> Registro(UsuarioRegistro usuarioRegistro)
+        {
+            var registroContent = new StringContent(
+                content: JsonSerializer.Serialize(usuarioRegistro),
                 Encoding.UTF8, mediaType: "application/Json");
-            var response = await httpClient_.PostAsync(requestUri: "https://localhost:44344/api/identidade/autenticar/", loginContent);
+            var response = await _httpClient.PostAsync("https://localhost:44344/api/identidade/nova-conta", registroContent);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(),options);
-        }
+            if (!TratarErrosResponse(response))
+            {
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult =
+                    JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+                return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+            }
 
-        public async Task<UsuarioRespostaLogin> Registro(UserViewModels.UsuarioRegistro usuarioRegistro)
-        {
-            var registroContent = new StringContent(
-                content: JsonSerializer.Serialize(usuarioRegistro),
-                Encoding.UTF8, mediaType: "application/Json");
-            var response = await httpClient_.PostAsync(requestUri: "https://localhost:44344/api/identidade/nova-conta/", registroContent);
-
-            var teste = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
         }
     }
 }

@@ -396,3 +396,4 @@ D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\WebMvc.csproj
 D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\WebMvc.dll
 D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\WebMvc.pdb
 D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\WebMvc.genruntimeconfig.cache
+D:\Projetos\presentex\ANF.Presentex\WebMvc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Summary\Default.cshtml.g.cs
